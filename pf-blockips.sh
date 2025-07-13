@@ -19,7 +19,7 @@ echo "# Auto-generated blocklist" | sudo tee "$ANCHOR_FILE" > /dev/null
 
 #writing the commands to block ips to the anchor file
 while IFS= read -r ip; do
-    echo "block drop from $ip to any" | sudo tee -a "$ANCHOR_FILE" > /dev/null
+    echo "block drop log from $ip to any" | sudo tee -a "$ANCHOR_FILE" > /dev/null
 done < "$TMP_FILE"
 
 #initiate reloading of the firewall rules
