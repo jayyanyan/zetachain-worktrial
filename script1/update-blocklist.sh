@@ -9,7 +9,11 @@ sudo touch /etc/pf.blocklist
 
 # Fetch the list and filter for valid IPs (in case there are comments or garbage)
 # and outputs the IPs to the blocklist file
-sudo curl -s "$BLOCKLIST_URL" -o "$BLOCKLIST_PATH"
+sudo curl -s $BLOCKLIST_URL \
+  | grep -Eo '^([0-9]{1,3}\.){3}[0-9]{1,3}$' \
+  | sort -u \
+  | sudo tee $BLOCKLIST_PATH > /dev/null
+
 
 # Replace pf table entries with new list
 sudo pfctl -t bad_ips -T replace -f /etc/pf.blocklist
