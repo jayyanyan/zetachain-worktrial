@@ -2,9 +2,10 @@
 
 #!/bin/bash
 
+# Create variables for file paths
 PF_CONF="/etc/pf.conf"
 
-#check_rule checks if the rule exists in the pf.conf file and adds it if not
+# add_exception checks if the rule exists in the pf.conf file and adds it if not
 add_exception() {
     local ip="$1"
     if (sudo grep -Fqx "pass quick from $ip to any" "$PF_CONF") && (sudo grep -Fqx "pass quick to $ip to any" "$PF_CONF") ; then
@@ -20,4 +21,5 @@ add_exception() {
     fi
 }
 
-add_exception '1.1.1.1'
+# test case
+#add_exception '1.1.1.1'

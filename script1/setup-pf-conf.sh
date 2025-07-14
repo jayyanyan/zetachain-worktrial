@@ -2,14 +2,15 @@
 
 #!/bin/bash
 
+# Create variables for file paths
 PF_CONF="/etc/pf.conf"
 
-# checks if /etc/pf.conf exists, if not creates it
+# Checks if /etc/pf.conf exists, if not creates it
 if [[ ! -f "$PF_CONF" ]]; then
   sudo touch "$PF_CONF"
 fi
 
-#check_rule checks if the rule exists in the pf.conf file and adds it if not
+# Check_rule checks if the rule exists in the pf.conf file and adds it if not
 check_rule() {
     local rule="$1"
     if sudo grep -Fqx "$rule" "$PF_CONF"; then
@@ -22,6 +23,7 @@ check_rule() {
     fi
 }
 
+# Add rules to the pf.conf file
 check_rule 'table <bad_ips> persist file "/etc/blocklist"'
 check_rule 'block out quick from any to <bad_ips>'
 check_rule 'block in quick from <bad_ips> to any'
