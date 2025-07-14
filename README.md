@@ -50,5 +50,5 @@ Example: JAMF
 
 If you do not have an MDM you can set the script to run regularly on your Mac
 
-chmod 644 ~/Library/LaunchAgents/com.local.pfblocklist.plist
-launchctl load ~/Library/LaunchAgents/com.local.pfblocklist.plist
+Open the ~/launchd setup folder and run the script install-launch-job.sh
+the script will mvoe the plist into your ~/Library/LaunchJobs and schedule update-blocklist.sh to run every 6 hours
