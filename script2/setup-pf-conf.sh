@@ -20,6 +20,6 @@ check_rule() {
     fi
 }
 
-check_rule 'anchor "blockips"'
-check_rule 'load anchor "blockips" from "/etc/pf.anchors/blockips"'
+check_rule 'anchor "blocklist"'
+check_rule 'load anchor "blocklist" from "/etc/pf.anchors/blocklist"'
 
