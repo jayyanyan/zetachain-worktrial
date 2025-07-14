@@ -3,11 +3,17 @@
 # Create variables for file paths and URLs
 BLOCKLIST_URL="https://raw.githubusercontent.com/firehol/blocklist-ipsets/master/firehol_level1.netset"
 BLOCKLIST_PATH="/etc/blocklist"
+WHITELIST_PATH="/etc/ip-allowlist"
 LOG_FILE="/etc/updatepfblocklist.log"
 
 # Create /etc/pf.blocklist if it doesn't exist
 if [[ ! -f "$BLOCKLIST_PATH" ]]; then
   sudo touch "$BLOCKLIST_PATH"
+fi
+
+# Create /etc/ip-allowlist if it doesn't exist
+if [[ ! -f "$WHITELIST_PATH" ]]; then
+  sudo touch "$WHITELIST_PATH"
 fi
 
 # Fetch the list and filter for valid IPs (in case there are comments or garbage)
