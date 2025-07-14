@@ -4,6 +4,11 @@
 
 PF_CONF="/etc/pf.conf"
 
+# checks if /etc/pf.conf exists, if not creates it
+if [[ ! -f "$PF_CONF" ]]; then
+  sudo touch "$PF_CONF"
+fi
+
 #check_rule checks if the rule exists in the pf.conf file and adds it if not
 check_rule() {
     local rule="$1"
@@ -12,14 +17,19 @@ check_rule() {
         #echo "Found: $rule"
         return 0
     else
-        echo "$rule" | sudo tee -a $PF_CONF > /dev/null
+        echo "$rule" | sudo tee -a "$PF_CONF" > /dev/null
         return 1
     fi
 }
 
-check_rule 'table <bad_ips> persist file "/etc/pf.blocklist"'
-check_rule 'block log out quick from any to <bad_ips>'
-check_rule 'block log in quick from <bad_ips> to any'
+check_rule 'table <bad_ips> persist file "/etc/blocklist"'
+check_rule 'block out quick from any to <bad_ips>'
+check_rule 'block in quick from <bad_ips> to any'
+
+# reloads the pf configuration
+sudo pfctl -f /etc/pf.conf
+sudo pfctl -e
+
 
 
 # Anchor block
