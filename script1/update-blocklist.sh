@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# FireHOL level 1 blocklist (low false positives)
+BLOCKLIST_URL="https://raw.githubusercontent.com/firehol/blocklist-ipsets/master/firehol_level1.netset"
+BLOCKLIST_PATH="/etc/pf.blocklist"
+
+# Fetch the list and filter for valid IPs (in case there are comments or garbage)
+# and outputs the IPs to the blocklist file
+curl -s "$BLOCKLIST_URL" | grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}' > "$BLOCKLIST_PATH"
+
+# Replace pf table entries with new list
+sudo pfctl -t bad_ips -T replace -f "$BLOCKLIST_PATH"
+
+# Log the update
+echo "$(date): Updated FireHOL blocklist with $(wc -l < $BLOCKLIST_PATH) IPs" >> /var/log/ipblock.log
