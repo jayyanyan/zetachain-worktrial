@@ -12,10 +12,13 @@ fi
 
 # Fetch the list and filter for valid IPs (in case there are comments or garbage)
 # and outputs the IPs to the blocklist file
-sudo curl -s $BLOCKLIST_URL \
+TMP_FILE=$(mktemp)
+curl -s "$BLOCKLIST_URL" \
   | grep -Eo '^([0-9]{1,3}\.){3}[0-9]{1,3}$' \
-  | sort -u \
-  | sudo tee $BLOCKLIST_PATH > /dev/null
+  | sort -u > "$TMP_FILE"
+
+# Overwrite the blocklist safely
+sudo mv "$TMP_FILE" "$BLOCKLIST_PATH"
 
 
 # Replace pf table entries with new list
