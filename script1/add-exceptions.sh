@@ -1,0 +1,22 @@
+#The following script is used to add the following lines to the /etc/pf.conf file
+
+#!/bin/bash
+
+PF_CONF="/etc/pf.conf"
+
+#check_rule checks if the rule exists in the pf.conf file and adds it if not
+add_exception() {
+    local ip="$1"
+    if (sudo grep -Fqx "pass quick from $ip to any" "$PF_CONF") && (sudo grep -Fqx "pass quick to $ip to any" "$PF_CONF") ; then
+        #used for debugging
+        #echo "Found: $rule"
+        return 0
+    else
+        echo "pass quick from $ip to any" | sudo tee -a "$PF_CONF" > /dev/null
+        echo "pass quick to $ip to any" | sudo tee -a "$PF_CONF" > /dev/null
+
+        return 1
+    fi
+}
+
+add_exception '1.1.1.1'
