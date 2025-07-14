@@ -12,4 +12,4 @@ curl -s "$BLOCKLIST_URL" | grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}' > "$BLOCKLIST_
 sudo pfctl -t bad_ips -T replace -f "$BLOCKLIST_PATH"
 
 # Log the update
-echo "$(date): Updated FireHOL blocklist with $(wc -l < $BLOCKLIST_PATH) IPs" >> /var/log/ipblock.log
+echo "$(date): Updated blocklist with $(wc -l < $BLOCKLIST_PATH) IPs" >> /var/log/ipblock.log
