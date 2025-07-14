@@ -3,7 +3,6 @@
 # FireHOL level 1 blocklist (low false positives)
 BLOCKLIST_URL="https://raw.githubusercontent.com/firehol/blocklist-ipsets/master/firehol_level1.netset"
 BLOCKLIST_PATH="/etc/pf.blocklist"
-TEMP_PATH="/tmp/pf.blocklist.tmp"
 
 #checks if /etc/pf.blocklist exists, if not creates it
 sudo touch /etc/pf.blocklist
