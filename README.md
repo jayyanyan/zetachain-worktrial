@@ -22,24 +22,24 @@ Setup Instructions
 1. Setup PF Rules
 Running the following script will configure the PF rules
 
-sudo ./setup-pf-conf.sh
+`sudo ./setup-pf-conf.sh`
 
 if script does not run, run the following then rerun the script
 
-chmod +x setup-pf-conf.sh
+`chmod +x setup-pf-conf.sh`
 
-2. Run the update-blocklist.sh script
+2. Run the `update-blocklist.sh` script
 Running the script will fetch a new list of malicious IPs from FireHOL
 Updates the PF table
 Restarts the PF process
 
-sudo ./update-blocklist.sh
+`sudo ./update-blocklist.sh`
 
 if script does not run, run the following then rerun the script
 
-chmod +x update-blocklist.sh
+`chmod +x update-blocklist.sh`
 
-3. Running the update-blocklist.sh script on an interval
+3. Running the `update-blocklist.sh` script on an interval
 If you have an MDM in place that can regularly schedule the script to run,
 you can upload the script and run it via a reoccuring policy.
 
@@ -50,5 +50,5 @@ Example: JAMF
 
 If you do not have an MDM you can set the script to run regularly on your Mac
 
-Open the ~/launchd setup folder and run the script install-launch-job.sh
-the script will mvoe the plist into your ~/Library/LaunchJobs and schedule update-blocklist.sh to run every 6 hours
+Open the `~/launchd setup"` folder and run the script `install-launch-job.sh`
+the script will mvoe the plist into your `~/Library/LaunchJobs` and schedule `update-blocklist.sh` to run every 6 hours
