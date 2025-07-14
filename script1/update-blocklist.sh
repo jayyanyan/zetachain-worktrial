@@ -14,5 +14,6 @@ curl -s "$BLOCKLIST_URL" -o "$BLOCKLIST_PATH"
 # Replace pf table entries with new list
 sudo pfctl -t bad_ips -T replace -f /etc/pf.blocklist
 
+sudo touch /etc/updatepfblocklist.log
 # Log the update
-echo "$(date): Updated blocklist with $(wc -l < $BLOCKLIST_PATH) IPs" >> /var/log/ipblock.log
+echo "$(date): Updated blocklist with $(wc -l < $BLOCKLIST_PATH) IPs" | sudo tee -a /etc/updatepfblocklist.log > /dev/null
