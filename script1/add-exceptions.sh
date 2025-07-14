@@ -12,6 +12,7 @@ add_exception() {
         #echo "Found: $rule"
         return 0
     else
+        # adds the exception rules to the pf.conf file
         echo "pass quick from $ip to any" | sudo tee -a "$PF_CONF" > /dev/null
         echo "pass quick to $ip to any" | sudo tee -a "$PF_CONF" > /dev/null
 
