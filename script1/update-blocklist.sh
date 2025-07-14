@@ -14,6 +14,8 @@ fi
 # Create /etc/ip-allowlist if it doesn't exist
 if [[ ! -f "$WHITELIST_PATH" ]]; then
   sudo touch "$WHITELIST_PATH"
+  sudo chmod 644 "$WHITELIST_PATH"
+
 fi
 
 # Fetch the list and filter for valid IPs (in case there are comments or garbage)
